@@ -12,19 +12,19 @@ services:
         ports:
            - "9090:9090"
         restart: always
-    # grafana:
-    #     container_name: grafana
-    #     build: requirements/grafana
-    #     hostname: localhost
-    #     volumes:
-    #        - grafana:/tmp
-    #     depends_on:
-    #        - prometheus
-    #     networks:
-    #        - app-network
-    #     ports:
-    #        - "3000:3000"
-    #     restart: always
+    grafana:
+        container_name: grafana
+        build: requirements/grafana
+        hostname: localhost
+        volumes:
+           - grafana:/work_directory
+        depends_on:
+           - prometheus
+        networks:
+           - app-network
+        ports:
+           - "3000:3000"
+        restart: always
     # server-1:
     #     container_name: server-1
     #     image: debian:buster
