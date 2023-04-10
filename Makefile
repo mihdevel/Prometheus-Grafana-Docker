@@ -1,3 +1,11 @@
+# Notes
+## ----------------------------------------------------------------------
+## Reload prometheus config
+## curl -X POST http://localhost:9090/-/reload
+
+## Copy file in container
+## docker cp foo.txt container_id:/foo.txt
+## ----------------------------------------------------------------------
 
 VOLUME_DIR=~/data
 VOLUME_DIR_PR=${VOLUME_DIR}/prometheus
@@ -6,7 +14,7 @@ VOLUME_DIR_GF=${VOLUME_DIR}/grafana
 all: upd
 up: mkdir
 	docker-compose up
-upd: mkdir
+up-d: mkdir
 	docker-compose up -d
 build:
 	docker-compose build
@@ -16,13 +24,16 @@ ps:
 	docker-compose ps
 psa:
 	docker ps -a
+enter:
+	docker exec -ti $(ARG) bash
+#   sudo make enter ARG=grafana
 rm:
-	docker rm $(ARGS)
-# 	sudo make rm ARGS=grafana
+	docker rm $(ARG)
+# 	sudo make rm ARG=grafana
 
 rmi:
-	docker rmi $(ARGS)
-# 	sudo make rmi ARGS=df1
+	docker rmi $(ARG)
+# 	sudo make rmi ARG=df1
 
 clean: stop
 	docker-compose rm -y
@@ -40,4 +51,4 @@ mkdir:
 	@echo "Дирректории готовы"
 
 restart: stop clean upd
-.PHONY: all up upd build stop ps psa rm rmi clean mkdir restart
+.PHONY: all up upd build stop ps psa enter rm rmi clean mkdir restart

@@ -25,15 +25,25 @@ services:
         ports:
            - "3000:3000"
         restart: always
-    # server-1:
-    #     container_name: server-1
-    #     image: debian:buster
-    #     hostname: localhost
-    #     networks:
-    #        - app-network
-    #     depends_on:
-    #        - prometheus
-    #     restart: always
+    server-1:
+        container_name: server1
+        build: requirements/server
+        hostname: localhost
+        networks:
+           - app-network
+        depends_on:
+           - grafana
+        restart: always
+
+    server-2:
+        container_name: server2
+        build: requirements/server
+        hostname: localhost
+        networks:
+           - app-network
+        depends_on:
+           - grafana
+        restart: always
 
 volumes:
     prometheus:
