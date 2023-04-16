@@ -24,16 +24,16 @@ ps:
 	docker-compose ps
 ps-a:
 	docker ps -a
-enter:
+in:
 	docker exec -ti $(ARG) bash
-#   sudo make enter ARG=grafana
+   # sudo make in ARG=grafana
 rm:
 	docker rm $(ARG)
-# 	sudo make rm ARG=grafana
+   # sudo make rm ARG=grafana
 
 rmi:
 	docker rmi $(ARG)
-# 	sudo make rmi ARG=df1
+   # sudo make rmi ARG=df1
 
 clean: stop
 	docker-compose rm -y
@@ -50,5 +50,5 @@ mkdir:
 	@if [ ! -d ${VOLUME_DIR_GF} ]; then mkdir ${VOLUME_DIR_GF}; fi
 	@echo "Дирректории готовы"
 
-restart: stop clean upd
-.PHONY: all up up-d build stop ps ps-a enter rm rmi clean mkdir restart
+restart: stop clean up-d
+.PHONY: all up up-d build stop ps ps-a in rm rmi clean mkdir restart
