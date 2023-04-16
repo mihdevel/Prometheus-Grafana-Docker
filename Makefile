@@ -11,7 +11,7 @@ VOLUME_DIR=~/data
 VOLUME_DIR_PR=${VOLUME_DIR}/prometheus
 VOLUME_DIR_GF=${VOLUME_DIR}/grafana
 
-all: upd
+all: up-d
 up: mkdir
 	docker-compose up
 up-d: mkdir
@@ -22,7 +22,7 @@ stop:
 	docker-compose stop
 ps:
 	docker-compose ps
-psa:
+ps-a:
 	docker ps -a
 enter:
 	docker exec -ti $(ARG) bash
@@ -51,4 +51,4 @@ mkdir:
 	@echo "Дирректории готовы"
 
 restart: stop clean upd
-.PHONY: all up upd build stop ps psa enter rm rmi clean mkdir restart
+.PHONY: all up up-d build stop ps ps-a enter rm rmi clean mkdir restart
